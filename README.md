@@ -18,5 +18,5 @@
 
 ### 1️⃣ **Clone the Repository**  
 ```bash
-git clone https://github.com/YOUR_USERNAME/pigeon-management-system.git
+git clone https://github.com/pingvinkowalski/pigeon-management-system.git
 cd pigeon-management-system
