@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Pigeon Manager</title>
+<style>
+body {
+  font-family: sans-serif;
+}
+#pigeonList {
+  list-style-type: none;
+  padding: 0;
+}
+#pigeonList li {
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  display: flex; /* Use flexbox for delete button */
+  align-items: center; /* Vertically align items */
+  justify-content: space-between; /* Put delete button on the right */
+}
+#pigeonList li button {
+  margin-left: 10px;
+}
+
+</style>
+</head>
+<body>
+
+<h1>Pigeon Manager</h1>
+
+<h2>Pigeons</h2>
+<ul id="pigeonList">
+</ul>
+
+<h2>Add Pigeon</h2>
+<form id="addPigeonForm">
+  Name: <input type="text" id="name" required><br>
+  Breed: <input type="text" id="breed" required><br>
+  Age: <input type="number" id="age" required><br>
+  <button type="submit">Add</button>
+</form>
+
+<script>
+  const pigeonList = document.getElementById('pigeonList');
+  const addPigeonForm = document.getElementById('addPigeonForm');
+
+  let pigeons = JSON.parse(localStorage.getItem('pigeons')) || []; // Load from local storage or empty array
+
+  function displayPigeons() {
+    pigeonList.innerHTML = '';
+    pigeons.forEach((pigeon, index) => {  // Include index for delete
+      const li = document.createElement('li');
+      li.textContent = `${pigeon.name} (${pigeon.breed}), Age: ${pigeon.age}`;
+
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Delete';
+      deleteButton.addEventListener('click', () => {
+        deletePigeon(index);
+      });
+      li.appendChild(deleteButton);
+      pigeonList.appendChild(li);
+    });
+  }
+
+  function addPigeon(name, breed, age) {
+    const newPigeon = { name, breed, age };
+    pigeons.push(newPigeon);
+    savePigeons(); // Save to local storage
+    displayPigeons();
+  }
+
+  function deletePigeon(index) {
+    pigeons.splice(index, 1); // Remove from array
+    savePigeons();
+    displayPigeons();
+  }
+
+  function savePigeons() {
+    localStorage.setItem('pigeons', JSON.stringify(pigeons));
+  }
+
+  addPigeonForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const breed = document.getElementById('breed').value;
+    const age = document.getElementById('age').value;
+
+    addPigeon(name, breed, age);
+    addPigeonForm.reset(); // Clear form after submit
+  });
+
+  displayPigeons(); // Initial display
+</script>
+
+</body>
+</html>
