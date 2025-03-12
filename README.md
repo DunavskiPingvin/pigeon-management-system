@@ -16,7 +16,11 @@
 
 ## 🛠️ Installation  
 
-### 1️⃣ **Clone the Repository**  
+### 2 **Clone the Repository**  
 ```bash
 git clone https://github.com/pingvinkowalski/pigeon-management-system.git
 cd pigeon-management-system
+```
+### 2 **Run the program**
+```bash
+python(3) main.py
