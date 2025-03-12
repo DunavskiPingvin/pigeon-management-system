@@ -23,4 +23,10 @@ cd pigeon-management-system
 ```
 ### 2 **Run the program**
 ```bash
-python(3) main.py
+python main.py
+```
+OR
+
+```bash
+python3 main.py
+```
